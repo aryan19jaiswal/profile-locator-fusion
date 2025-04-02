@@ -1,8 +1,7 @@
-
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { Profile, ProfileFormData } from "../types";
 import { profiles as initialProfiles } from "../data/profiles";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 interface ProfileContextType {
   profiles: Profile[];
@@ -26,7 +25,6 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter profiles based on search query
   const filteredProfiles = profiles.filter(profile => {
     const searchLower = searchQuery.toLowerCase();
     return (
@@ -49,7 +47,6 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setLoading(true);
     
     setTimeout(() => {
-      // Simulate API call delay
       const newProfile: Profile = {
         ...profileData,
         id: Date.now().toString(),
@@ -65,14 +62,12 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setLoading(true);
     
     setTimeout(() => {
-      // Simulate API call delay
       const updatedProfiles = profiles.map(profile => 
         profile.id === id ? { ...profileData, id } : profile
       );
       
       setProfiles(updatedProfiles);
       
-      // Update selectedProfile if it's the one being edited
       if (selectedProfile?.id === id) {
         setSelectedProfile({ ...profileData, id });
       }
@@ -86,10 +81,8 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setLoading(true);
     
     setTimeout(() => {
-      // Simulate API call delay
       setProfiles(profiles.filter(profile => profile.id !== id));
       
-      // Clear selectedProfile if it's the one being deleted
       if (selectedProfile?.id === id) {
         setSelectedProfile(null);
       }

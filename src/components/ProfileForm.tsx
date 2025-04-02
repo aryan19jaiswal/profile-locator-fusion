@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Profile, ProfileFormData } from "@/types";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import LoadingSpinner from "./LoadingSpinner";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 interface ProfileFormProps {
   profile?: Profile;
@@ -64,7 +63,6 @@ const ProfileForm = ({ profile, onSubmit, onCancel, isLoading }: ProfileFormProp
     setFormData({ ...formData, interests });
   };
 
-  // Simulate geocoding functionality (in a real app, this would call a geocoding API)
   const handleGeocodeAddress = async () => {
     if (!formData.address) {
       setAddressFetchError("Please enter an address");
@@ -73,9 +71,7 @@ const ProfileForm = ({ profile, onSubmit, onCancel, isLoading }: ProfileFormProp
 
     setAddressFetchError(null);
     
-    // Simulate API call with random coordinates (in a real app, use a geocoding service)
     try {
-      // Generate random coordinates near San Francisco for demo
       const lat = 37.7749 + (Math.random() - 0.5) * 0.1;
       const lng = -122.4194 + (Math.random() - 0.5) * 0.1;
       
@@ -89,13 +85,11 @@ const ProfileForm = ({ profile, onSubmit, onCancel, isLoading }: ProfileFormProp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate form
     if (!formData.name || !formData.description || !formData.address) {
       toast.error("Please fill in all required fields");
       return;
     }
     
-    // Check if location coordinates are set
     if (formData.location.lat === 0 && formData.location.lng === 0) {
       toast.error("Please geocode the address to get location coordinates");
       return;
