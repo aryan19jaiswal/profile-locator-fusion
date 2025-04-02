@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+
+import React, { createContext, useState, useContext } from "react";
 import { Profile, ProfileFormData } from "../types";
 import { profiles as initialProfiles } from "../data/profiles";
 import { toast } from "sonner";
